@@ -9,6 +9,10 @@ import { CategoryModule } from './category/category.module';
 import { UsersModule } from './users/users.module';
 import { UsersAuthModule } from './users-auth/users-auth.module';
 import { ApolloDriverConfig, ApolloDriver} from '@nestjs/apollo';
+import { DermantinModule } from './dermantin/dermantin.module';
+import { DermantinImageModule } from './dermantin-image/dermantin-image.module';
+import { StoreModule } from './store/store.module';
+import { AdvertisementsModule } from './advertisements/advertisements.module';
 
 @Module({
   imports: [
@@ -41,6 +45,10 @@ import { ApolloDriverConfig, ApolloDriver} from '@nestjs/apollo';
     CategoryModule,
     UsersModule,
     UsersAuthModule,
+    DermantinModule,
+    DermantinImageModule,
+    StoreModule,
+    AdvertisementsModule,
     
 ],
   controllers: [],

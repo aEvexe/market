@@ -1,5 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Dermantin } from '../../dermantin/entities/dermantin.entity';
 
 @ObjectType()
 @Entity()
@@ -23,4 +24,7 @@ export class Category {
   @Field()
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Dermantin, (d) => d.category)
+  dermantins: Dermantin[];
 }

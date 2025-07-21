@@ -1,16 +1,11 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Store } from '../../store/entities/store.entity';
 
 @ObjectType()
 @Entity('users')
 export class User {
-  @Field(() => ID)
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,37 +15,33 @@ export class User {
 
   @Field()
   @Column()
-  password: string;
-
-  @Field({ nullable: true })
-  @Column({ nullable: true })
   phone: string;
 
   @Field()
-  @Column({ type: 'enum', enum: ['admin', 'user', 'moderator'] })
+  @Column()
+  refresh_token: string;
+
+  @Field()
+  @Column()
+  password: string;
+
+  @Field()
+  @Column({ type: 'enum', enum: ['ADMIN', 'MANAGER', 'STAFF'] }) // adjust enum values
   role: string;
 
   @Field()
-  @Column({ type: 'bigint', default: 0 })
+  @Column({ type: 'bigint' })
   is_verified: number;
 
   @Field()
-  @Column({ type: 'enum', enum: ['north', 'south', 'east', 'west'] })
-  region: string;
-
-  @Field()
-  @Column({ type: 'enum', enum: ['en', 'fr', 'es', 'de'] })
+  @Column({ type: 'enum', enum: ['UZ', 'RU', 'EN'] })
   lang: string;
 
-  @Column({ nullable: true })
-  refresh_token?: string;
-
   @Field()
-  @CreateDateColumn()
-  createdAt: Date;
-  
+  @Column({ type: 'enum', enum: ['TASHKENT', 'SAMARKAND', 'OTHER'] })
+  region: string;
 
-  @Field()
-  @UpdateDateColumn()
-  updatedAt: Date;
+  @Field(() => [Store], { nullable: true })
+  @OneToMany(() => Store, store => store.manager)
+  stores?: Store[];
 }

@@ -2,6 +2,41 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Advertisement {
+  dermantin: Dermantin!
+  dermantin_id: Float!
+  discount_percent: Float!
+  end_date: DateTime!
+  id: Float!
+  start_date: DateTime!
+  status: String!
+  type: String!
+}
+
+type Category {
+  createdAt: DateTime!
+  id: ID!
+  logo: String!
+  name: String!
+  updatedAt: DateTime!
+}
+
+input CreateDermantinImageDto {
+  dermantinId: Int!
+  image_url: String!
+  is_main: Boolean! = false
+}
+
+input CreateStoreDto {
+  description: String
+  logo_url: String
+  managerId: Int!
+  name: String!
+  rating_id: Int!
+  region_id: Int!
+  status: String!
+}
+
 input CreateUserDto {
   fullname: String!
   is_verified: Float!
@@ -16,15 +51,74 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Dermantin {
+  advertisements: [Advertisement!]
+  category: Category!
+  class: String!
+  id: Float!
+  images: DermantinImage!
+  name: String!
+  price: Float!
+  rating: Float!
+  store: Store!
+  store_id: Float!
+}
+
+type DermantinImage {
+  dermantin: Dermantin!
+  id: Float!
+  image_url: String!
+  is_main: Boolean!
+}
+
 type Mutation {
+  createDermantinImage(createDermantinImageDto: CreateDermantinImageDto!): DermantinImage!
+  createStore(createStoreDto: CreateStoreDto!): Store!
   createUser(createUser: CreateUserDto!): User!
+  removeDermantinImage(id: ID!): Boolean!
+  removeStore(id: Int!): Int!
   removeUser(id: ID!): Float!
+  updateDermantinImage(id: ID!, updateDermantinImageDto: UpdateDermantinImageDto!): DermantinImage!
+  updateStore(id: Int!, updateStoreDto: UpdateStoreDto!): Store!
   updateUser(id: ID!, updateUser: UpdateUserDto!): User!
 }
 
 type Query {
+  findAllDermantinImage: [DermantinImage!]!
+  findAllStore: [Store!]!
   findAllUser: [User!]!
+  findOneDermantinImage(id: ID!): DermantinImage!
+  findOneStore(id: Int!): Store!
   findOneUser(id: ID!): User!
+}
+
+type Store {
+  dermantins: [Dermantin!]
+  description: String
+  id: Int!
+  logo_url: String
+  manager: User!
+  name: String!
+  rating_id: Int!
+  region_id: Int!
+  status: String!
+}
+
+input UpdateDermantinImageDto {
+  dermantinId: Int
+  id: Int!
+  image_url: String
+  is_main: Boolean = false
+}
+
+input UpdateStoreDto {
+  description: String
+  logo_url: String
+  managerId: Int
+  name: String
+  rating_id: Int
+  region_id: Int
+  status: String
 }
 
 input UpdateUserDto {
@@ -34,14 +128,14 @@ input UpdateUserDto {
 }
 
 type User {
-  createdAt: DateTime!
   fullname: String!
-  id: ID!
+  id: Int!
   is_verified: Float!
   lang: String!
   password: String!
-  phone: String
+  phone: String!
+  refresh_token: String!
   region: String!
   role: String!
-  updatedAt: DateTime!
+  stores: [Store!]
 }
