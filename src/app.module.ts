@@ -13,6 +13,10 @@ import { DermantinModule } from './dermantin/dermantin.module';
 import { DermantinImageModule } from './dermantin-image/dermantin-image.module';
 import { StoreModule } from './store/store.module';
 import { AdvertisementsModule } from './advertisements/advertisements.module';
+import { RequestModule } from './request/request.module';
+import { ChatModule } from './chat/chat.module';
+import { MessageModule } from './message/message.module';
+import { HistoryModule } from './history/history.module';
 
 @Module({
   imports: [
@@ -49,6 +53,10 @@ import { AdvertisementsModule } from './advertisements/advertisements.module';
     DermantinImageModule,
     StoreModule,
     AdvertisementsModule,
+    RequestModule,
+    ChatModule,
+    MessageModule,
+    HistoryModule,
     
 ],
   controllers: [],

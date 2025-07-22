@@ -2,6 +2,7 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { Dermantin } from '../../dermantin/entities/dermantin.entity';
+import { Chat } from '../../chat/entities/chat.entity';
 
 @ObjectType()
 @Entity('stores')
@@ -42,4 +43,8 @@ export class Store {
   @Field(() => [Dermantin], { nullable: true })
   @OneToMany(() => Dermantin, dermantin => dermantin.store)
   dermantins?: Dermantin[];
+
+  @Field(() => [Chat], { nullable: true })
+  @OneToMany(() => Chat, chat => chat.store)
+  chats?: Chat[];
 }

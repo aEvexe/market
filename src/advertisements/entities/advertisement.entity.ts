@@ -29,10 +29,6 @@ export class Advertisement {
   @Column()
   end_date: Date;
 
-  @Field()
-  @Column()
-  dermantin_id: number;
-
   @Field(() => Dermantin)
   @ManyToOne(() => Dermantin, dermantin => dermantin.advertisements, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'dermantin_id' })

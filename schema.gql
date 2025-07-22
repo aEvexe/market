@@ -4,7 +4,6 @@
 
 type Advertisement {
   dermantin: Dermantin!
-  dermantin_id: Float!
   discount_percent: Float!
   end_date: DateTime!
   id: Float!
@@ -19,6 +18,13 @@ type Category {
   logo: String!
   name: String!
   updatedAt: DateTime!
+}
+
+type Chat {
+  id: Float!
+  messages: [Message!]
+  store: Store!
+  user: User!
 }
 
 input CreateDermantinImageDto {
@@ -55,6 +61,7 @@ type Dermantin {
   advertisements: [Advertisement!]
   category: Category!
   class: String!
+  histories: [History!]
   id: Float!
   images: DermantinImage!
   name: String!
@@ -69,6 +76,19 @@ type DermantinImage {
   id: Float!
   image_url: String!
   is_main: Boolean!
+}
+
+type History {
+  dermantin: Dermantin!
+  id: Float!
+  user: User!
+}
+
+type Message {
+  chat: Chat!
+  id: Float!
+  is_read: Boolean!
+  text: String!
 }
 
 type Mutation {
@@ -92,7 +112,16 @@ type Query {
   findOneUser(id: ID!): User!
 }
 
+type Request {
+  id: Float!
+  status: String!
+  text: Float!
+  user_id: Float!
+  users: User!
+}
+
 type Store {
+  chats: [Chat!]
   dermantins: [Dermantin!]
   description: String
   id: Int!
@@ -128,7 +157,9 @@ input UpdateUserDto {
 }
 
 type User {
+  chats: [Chat!]
   fullname: String!
+  histories: [History!]
   id: Int!
   is_verified: Float!
   lang: String!
@@ -136,6 +167,7 @@ type User {
   phone: String!
   refresh_token: String!
   region: String!
+  requests: [Request!]
   role: String!
   stores: [Store!]
 }

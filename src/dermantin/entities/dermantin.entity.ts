@@ -4,6 +4,7 @@ import { Category } from "../../category/entities/category.entity";
 import { DermantinImage } from "../../dermantin-image/entities/dermantin-image.entity";
 import { Store } from "../../store/entities/store.entity";
 import { Advertisement } from "../../advertisements/entities/advertisement.entity";
+import { History } from "../../history/entities/history.entity";
 
 @ObjectType()
 @Entity()
@@ -52,4 +53,8 @@ export class Dermantin {
   @Field(() => [Advertisement], { nullable: true })
   @OneToMany(() => Advertisement, ad => ad.dermantin)
   advertisements: Advertisement[];
+
+  @Field(()=> [History], { nullable: true })
+  @OneToMany(() => History, history => history.dermantin)
+  histories: History[]
 }
