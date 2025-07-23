@@ -4,6 +4,7 @@ import { Store } from '../../store/entities/store.entity';
 import { Request } from '../../request/entities/request.entity';
 import { Chat } from '../../chat/entities/chat.entity';
 import { History } from '../../history/entities/history.entity';
+import { Oreder } from '../../oreder/entities/oreder.entity';
 
 @ObjectType()
 @Entity('users')
@@ -59,4 +60,8 @@ export class User {
   @Field(() => [History], { nullable: true })
   @OneToMany(() => History, history => history.user)
   histories: Chat[];
+
+  @Field(() => [Oreder], { nullable: true })
+  @OneToMany(() => Oreder, oreder => oreder.user)
+  orders: Oreder[];
 }

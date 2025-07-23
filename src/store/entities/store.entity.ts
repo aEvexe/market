@@ -3,6 +3,8 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColum
 import { User } from '../../users/entities/user.entity';
 import { Dermantin } from '../../dermantin/entities/dermantin.entity';
 import { Chat } from '../../chat/entities/chat.entity';
+import { Oreder } from '../../oreder/entities/oreder.entity';
+import { Social } from '../../social/entities/social.entity';
 
 @ObjectType()
 @Entity('stores')
@@ -47,4 +49,12 @@ export class Store {
   @Field(() => [Chat], { nullable: true })
   @OneToMany(() => Chat, chat => chat.store)
   chats?: Chat[];
+
+  @Field(() => [Oreder], { nullable: true })
+  @OneToMany(() => Oreder, oreder => oreder.user)
+  orders: Oreder[];
+
+  @Field(() => [Social], { nullable: true })
+  @OneToMany(() => Social, social => social.store)
+  socials: Social[];
 }

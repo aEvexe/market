@@ -5,6 +5,7 @@ import { DermantinImage } from "../../dermantin-image/entities/dermantin-image.e
 import { Store } from "../../store/entities/store.entity";
 import { Advertisement } from "../../advertisements/entities/advertisement.entity";
 import { History } from "../../history/entities/history.entity";
+import { Oreder } from "../../oreder/entities/oreder.entity";
 
 @ObjectType()
 @Entity()
@@ -57,4 +58,8 @@ export class Dermantin {
   @Field(()=> [History], { nullable: true })
   @OneToMany(() => History, history => history.dermantin)
   histories: History[]
+
+  @Field(() => [Oreder], { nullable: true })
+  @OneToMany(() => Oreder, oreder => oreder.user)
+  orders: Oreder[];
 }

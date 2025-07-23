@@ -17,6 +17,9 @@ import { RequestModule } from './request/request.module';
 import { ChatModule } from './chat/chat.module';
 import { MessageModule } from './message/message.module';
 import { HistoryModule } from './history/history.module';
+import { OrederModule } from './oreder/oreder.module';
+import { SocialModule } from './social/social.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -57,6 +60,9 @@ import { HistoryModule } from './history/history.module';
     ChatModule,
     MessageModule,
     HistoryModule,
+    OrederModule,
+    SocialModule,
+    PaymentModule,
     
 ],
   controllers: [],

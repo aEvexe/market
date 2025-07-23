@@ -65,6 +65,7 @@ type Dermantin {
   id: Float!
   images: DermantinImage!
   name: String!
+  orders: [Oreder!]
   price: Float!
   rating: Float!
   store: Store!
@@ -103,6 +104,36 @@ type Mutation {
   updateUser(id: ID!, updateUser: UpdateUserDto!): User!
 }
 
+type Oreder {
+  dermantin: Dermantin!
+  id: Float!
+  payments: [Payment!]
+  remaining_price: Float!
+  store: Store!
+  total_price: Float!
+  user: User!
+}
+
+type Payment {
+  amount: Float!
+  id: Float!
+  method: PaymentMethod!
+  order: Oreder!
+  status: PaymentStatus!
+}
+
+enum PaymentMethod {
+  CARD
+  CASH
+  TRANSFER
+}
+
+enum PaymentStatus {
+  COMPLETED
+  FAILED
+  PENDING
+}
+
 type Query {
   findAllDermantinImage: [DermantinImage!]!
   findAllStore: [Store!]!
@@ -120,6 +151,14 @@ type Request {
   users: User!
 }
 
+type Social {
+  id: Float!
+  link: String!
+  name: String!
+  store: Store!
+  type: String!
+}
+
 type Store {
   chats: [Chat!]
   dermantins: [Dermantin!]
@@ -128,8 +167,10 @@ type Store {
   logo_url: String
   manager: User!
   name: String!
+  orders: [Oreder!]
   rating_id: Int!
   region_id: Int!
+  socials: [Social!]
   status: String!
 }
 
@@ -163,6 +204,7 @@ type User {
   id: Int!
   is_verified: Float!
   lang: String!
+  orders: [Oreder!]
   password: String!
   phone: String!
   refresh_token: String!
